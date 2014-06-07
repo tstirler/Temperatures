@@ -4,19 +4,18 @@ public class temperature {
     clearConsole();
     splashScreen();
     String scale = selectScale();
-
     selectTemperature(scale);
   }
 
   //Method for converting Celcius to Farenheit
   public static double celToFar(double calcTemp) {
-    double newTemp = ((calcTemp * 9) / 5) + 32;
+    double newTemp = ((calcTemp * 9.0) / 5.0) + 32;
     return newTemp;
   }
 
   //Method for converting Farenheit to Celcius
   public static double farToCel(double calcTemp) {
-    double newTemp = (calcTemp - 32) * (5 / 9);
+    double newTemp = (calcTemp - 32) * (5.0 / 9.0);
     return newTemp;
   }
 
@@ -69,7 +68,7 @@ public class temperature {
 
     double userTemp = getNumber();
     System.out.println();
-    System.out.println(userTemp + " in " + scale + " is ");
+    System.out.println(userTemp + " in " + scale.toUpperCase() + " is ");
     if (scale.equals("f")) {
       double newTemp = farToCel(userTemp);
       System.out.println(newTemp + " in Celcius.");

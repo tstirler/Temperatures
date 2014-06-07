@@ -25,6 +25,5 @@ As of now it calculates between Farenheit and Celcius.
  - Method for receiving user input.
  - Methodes that convert from Celcius to Farenheit and vice versa.
 
-## Bugs:
- - Converting from F to C returns 0.0
+## Known bugs:
 
