@@ -8,11 +8,13 @@ public class temperature {
     selectTemperature(scale);
   }
 
+  //Method for converting Celcius to Farenheit
   public static double celToFar(double calcTemp) {
     double newTemp = ((calcTemp * 9) / 5) + 32;
     return newTemp;
   }
 
+  //Method for converting Farenheit to Celcius
   public static double farToCel(double calcTemp) {
     double newTemp = (calcTemp - 32) * (5 / 9);
     return newTemp;
@@ -28,6 +30,7 @@ public class temperature {
     System.out.println("");
   }
 
+  //Grabs the nest text input from the keyboard as a string.
   public static String getString() {
     System.out.print(" > "); // Add a nice prompt.
     Scanner in = new Scanner(System.in);
@@ -36,13 +39,15 @@ public class temperature {
     return userInput;
   }
 
+  //Grabs the nest numeric input from the keyboard as an double.
   public static double getNumber() {
     System.out.print(" > "); // Add a nice prompt.
     Scanner in = new Scanner(System.in);
-    int userNumberInput = in.nextInt();
+    double userNumberInput = in.nextInt();
     return userNumberInput;
   }
 
+  //This selects if the user wants to convert from C or F.
   public static String selectScale() {
     System.out.println("Do you wish to convert from (C)elcius to Farenheit, or from (F)arenheit to Celcius?");
     String userScaleInput = getString();
@@ -58,6 +63,7 @@ public class temperature {
     return "not selected";
   }
 
+  //Get the temperature the user wants to convert.
   public static void selectTemperature(String scale) {
     System.out.println("What temperature would you like to convert?");
 
@@ -75,6 +81,7 @@ public class temperature {
     }
   }
 
+  //Simple clearing of the console.
   public static void clearConsole() {
     for (int i = 0; i < 80; ++i) System.out.println();
   }
