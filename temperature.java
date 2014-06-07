@@ -1,10 +1,14 @@
 import java.util.Scanner;
 public class temperature {
   public static void main(String[] args) {
+    Boolean convert = true;
     clearConsole();
     splashScreen();
-    String scale = selectScale();
-    selectTemperature(scale);
+    while (convert){
+      String scale = selectScale();
+      selectTemperature(scale);
+      convert = runProgram();
+    }
   }
 
   //Method for converting Celcius to Farenheit
@@ -19,6 +23,22 @@ public class temperature {
     return newTemp;
   }
 
+  //Check to see if user wants to do more calculations
+  public static Boolean runProgram() {
+    Scanner in = new Scanner(System.in);
+    Boolean convert = true;
+    System.out.println("");
+    System.out.println("Do you wish to do more conversions? Y/N");
+    String keepRunning = getString();
+    keepRunning = keepRunning.toLowerCase();
+    if (keepRunning.equals("n")) {
+        convert = false;      
+     } else {
+      clearConsole();
+     }
+    return convert;
+  }
+
   public static void splashScreen() {
     System.out.println("");
     System.out.println("   ___________________________________________________ ");
@@ -31,8 +51,8 @@ public class temperature {
 
   //Grabs the nest text input from the keyboard as a string.
   public static String getString() {
-    System.out.print(" > "); // Add a nice prompt.
     Scanner in = new Scanner(System.in);
+    System.out.print(" > "); // Add a nice prompt.
     String userInput = in.nextLine();
     userInput = userInput.toLowerCase();
     return userInput;
@@ -40,8 +60,8 @@ public class temperature {
 
   //Grabs the nest numeric input from the keyboard as an double.
   public static double getNumber() {
-    System.out.print(" > "); // Add a nice prompt.
     Scanner in = new Scanner(System.in);
+    System.out.print(" > "); // Add a nice prompt.
     double userNumberInput = in.nextInt();
     return userNumberInput;
   }
