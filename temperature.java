@@ -68,7 +68,7 @@ public class temperature {
 
   //This selects if the user wants to convert from C or F.
   public static String selectScale() {
-    System.out.println("Do you wish to convert from (C)elcius to Farenheit, or from (F)arenheit to Celcius?");
+    System.out.println("Do you wish to convert from (C)elcius to Farenheit,\n          or from (F)arenheit to Celcius?");
     String userScaleInput = getString();
     if (userScaleInput.equals("f")) {
       System.out.println("You've selected Farenheit.");
