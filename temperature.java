@@ -8,13 +8,13 @@ public class temperature {
     selectTemperature(scale);
   }
 
-  public static double celToFar(double celTemp) {
-    double newTemp = ((celTemp * 9) / 5) + 32;
+  public static double celToFar(double calcTemp) {
+    double newTemp = ((calcTemp * 9) / 5) + 32;
     return newTemp;
   }
 
-  public static double farToCel(double farTemp) {
-    double newTemp = (farTemp-32) * (5 / 9);
+  public static double farToCel(double calcTemp) {
+    double newTemp = (calcTemp - 32) * (5 / 9);
     return newTemp;
   }
 
@@ -62,14 +62,16 @@ public class temperature {
     System.out.println("What temperature would you like to convert?");
 
     double userTemp = getNumber();
+    System.out.println();
+    System.out.println(userTemp + " in " + scale + " is ");
     if (scale.equals("f")) {
       double newTemp = farToCel(userTemp);
-      System.out.println("");
-      System.out.println(userTemp + " in Farenheit is " + newTemp);
+      System.out.println(newTemp + " in Celcius.");
+      System.out.println();
     } else if (scale.equals("c")) {
       double newTemp = celToFar(userTemp);
-      System.out.println("");
-      System.out.println(userTemp + " in Celcius is " + newTemp);
+      System.out.println(newTemp + " in Farenheit.");
+      System.out.println();
     }
   }
 
