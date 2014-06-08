@@ -18,6 +18,7 @@ As of now it calculates between Farenheit and Celcius.
 ##  TODO:
  - build gui
  -- text vs graphic
+ - Enable command-line input
 
 
 ##  Implemented:
