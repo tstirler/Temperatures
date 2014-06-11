@@ -20,6 +20,7 @@ As of now it calculates between Farenheit and Celcius.
  - build gui
  -- text vs graphic
  - more than Celcius and Farenheit
+ - Need MOAR commenting
 
 ##  Implemented:
  - A lovely splash-screen.
