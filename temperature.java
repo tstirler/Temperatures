@@ -1,7 +1,11 @@
 import java.util.Scanner;
-public class temperature {
+public class Temperature {
   public static void main(String[] args) {
     Boolean convert = true;
+    if (args.length > 0) {
+      shellCommands(args);
+      System.exit(0);
+    }
     clearConsole();
     splashScreen();
     while (convert){
@@ -88,6 +92,10 @@ public class temperature {
 
     double userTemp = getNumber();
     System.out.println();
+    conversion(userTemp, scale);
+  }
+
+  public static void conversion(double userTemp, String scale) {
     System.out.println(userTemp + " in " + scale.toUpperCase() + " is ");
     if (scale.equals("f")) {
       double newTemp = farToCel(userTemp);
@@ -97,6 +105,38 @@ public class temperature {
       double newTemp = celToFar(userTemp);
       System.out.println(newTemp + " in Farenheit.");
       System.out.println();
+    }
+  }
+
+  //Catch commandline input
+  public static void shellCommands(String passedInput[]) {
+    if (passedInput[0].equals("?")){
+      System.out.println("");
+      System.out.println("Usage:");
+      System.out.println("Run Temperature without arguments for a menu-based conversion,\nor run with arguments for a quick conversion.");
+      System.out.println("Commandline arguments are used like this:");
+      System.out.println("Temperature [temperature to convert] [from scale] [to scale]");
+      System.out.println("Supported scales: (C)elcius and (F)arenheit.");
+      System.out.println("");
+      System.out.println("Example:\ntemperature 100 F C\nWill convert 100 Farenheit into Celcius.");
+      System.exit(0);
+    }
+    String firstArgString = passedInput[0];
+    String secondArg  = passedInput[1];
+    String thirdArg = passedInput[2];
+    numberCheck(firstArgString);
+    double firstArg = Double.valueOf(firstArgString);
+    conversion(firstArg, secondArg);
+  }
+
+  public static void numberCheck(String isANumber) {
+    double check;
+    try {
+      check = Double.valueOf(isANumber);
+    } catch (NumberFormatException e) {
+      //Will Throw exception if isANumber isn't a number!
+      System.out.println("The first argument passed was not a number.");
+      System.exit(1);
     }
   }
 
