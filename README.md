@@ -20,6 +20,7 @@ As of now it calculates between Farenheit and Celcius.
  - build gui
  -- text vs graphic
  - more than Celcius and Farenheit
+ -- Working on Kelvin selection
  - Need MOAR commenting
 
 ##  Implemented:
@@ -31,4 +32,5 @@ As of now it calculates between Farenheit and Celcius.
 
 
 ## Known bugs:
+ - Broke commandlineinput...
 

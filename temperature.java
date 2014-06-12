@@ -2,6 +2,10 @@ import java.util.Scanner;
 public class Temperature {
   public static void main(String[] args) {
     Boolean convert = true;
+    String fromScale;
+    String toScale;
+    double userTemp;
+    double newTemp;
     if (args.length > 0) {
       shellCommands(args);
       System.exit(0);
@@ -9,21 +13,46 @@ public class Temperature {
     clearConsole();
     splashScreen();
     while (convert){
-      String scale = selectScale();
-      selectTemperature(scale);
+      int scale = selectScale();
+      userTemp = selectTemperature();
+      conversion(userTemp, scale);
       convert = runProgram();
     }
   }
 
-  //Method for converting Celcius to Farenheit
+  //Method for converting Celsius to Farenheit
   public static double celToFar(double calcTemp) {
     double newTemp = ((calcTemp * 9.0) / 5.0) + 32;
     return newTemp;
   }
 
-  //Method for converting Farenheit to Celcius
+  //Method for converting Celsius to Kelvin
+  public static double celToKel(double calcTemp) {
+    double newTemp = calcTemp + 273.15;
+    return newTemp;
+  }
+
+  //Method for converting Kelvin to Celsius
+  public static double kelToCel(double calcTemp) {
+    double newTemp = calcTemp - 273.15;
+    return newTemp;
+  }
+
+  //Method for converting Farenheit to Celsius
   public static double farToCel(double calcTemp) {
     double newTemp = (calcTemp - 32) * (5.0 / 9.0);
+    return newTemp;
+  }
+
+  public static double farToKel(double calcTemp) {
+    double newTemp = farToCel(calcTemp);
+    newTemp = celToKel(newTemp);
+    return newTemp;
+  }
+
+  public static double kelToFar(double calcTemp) {
+    double newTemp = kelToCel(calcTemp);
+    newTemp = celToFar(newTemp);
     return newTemp;
   }
 
@@ -70,41 +99,75 @@ public class Temperature {
     return userNumberInput;
   }
 
+  //Grabs the nest numeric input from the keyboard as an integer.
+  public static int getNumberInt() {
+    Scanner in = new Scanner(System.in);
+    System.out.print(" > "); // Add a nice prompt.
+    int userNumberInputInt = in.nextInt();
+    return userNumberInputInt;
+  }
+
   //This selects if the user wants to convert from C or F.
-  public static String selectScale() {
-    System.out.println("Do you wish to convert from (C)elcius to Farenheit,\n          or from (F)arenheit to Celcius?");
-    String userScaleInput = getString();
-    if (userScaleInput.equals("f")) {
-      System.out.println("You've selected Farenheit.");
-      return userScaleInput;
-    } else if (userScaleInput.equals("c")) {
-      System.out.println("You've selected Celcius.");
-      return userScaleInput;
-    } else {
-      System.out.println("You have not selected a usable temperature scale.");
+  public static int selectScale() {
+    System.out.println("Do you wish to convert from:");
+    System.out.println("1: Celsius to Farenheit");
+    System.out.println("2: Farenheit to Celsius");
+    System.out.println("3: Celsius to Kelvin");
+    System.out.println("4: Farenheit to Kelvin");
+    System.out.println("5: Kelvin to Celsius");
+    System.out.println("6: Kelvin to Farenheit");
+    int userScaleInput = getNumberInt();
+    switch (userScaleInput) {
+      case 1: System.out.println("");
+              System.out.println("You've selected Celsius to Farenheit.");
+              break;
+      case 2: System.out.println("");
+              System.out.println("You've selected Farenheit to Celsius.");
+              break;
+      case 3: System.out.println("");
+              System.out.println("You've selected Celsius to Kelvin.");
+              break;
+      case 4: System.out.println("");
+              System.out.println("You've selected Farenheit to Kelvin.");
+              break;
+      case 5: System.out.println("");
+              System.out.println("You've selected Kelvin to Celsius.");
+              break;
+      case 6: System.out.println("");
+              System.out.println("You've selected Kelvin to Farenheit.");
+              break;
     }
-    return "not selected";
+    return userScaleInput;
   }
 
   //Get the temperature the user wants to convert.
-  public static void selectTemperature(String scale) {
+  public static double selectTemperature() {
     System.out.println("What temperature would you like to convert?");
-
     double userTemp = getNumber();
-    System.out.println();
-    conversion(userTemp, scale);
+    return userTemp;
   }
 
-  public static void conversion(double userTemp, String scale) {
-    System.out.println(userTemp + " in " + scale.toUpperCase() + " is ");
-    if (scale.equals("f")) {
-      double newTemp = farToCel(userTemp);
-      System.out.println(newTemp + " in Celcius.");
-      System.out.println();
-    } else if (scale.equals("c")) {
-      double newTemp = celToFar(userTemp);
-      System.out.println(newTemp + " in Farenheit.");
-      System.out.println();
+  public static void conversion(double userTemp, int scale) {
+    double newTemp;
+    switch (scale) {
+      case 1: newTemp = celToFar(userTemp);
+              System.out.println(userTemp + " in Celsius is " + newTemp + " in Farenheit.");
+              break;
+      case 2: newTemp = farToCel(userTemp);
+              System.out.println(userTemp + " in Farenheit is " + newTemp + " in Celsius.");
+              break;
+      case 3: newTemp = celToKel(userTemp);
+              System.out.println(userTemp + " in Celsius is " + newTemp + " in Kelvin.");
+              break;
+      case 4: newTemp = farToKel(userTemp);
+              System.out.println(userTemp + " in Farenheit is " + newTemp + " in Kelvin.");
+              break;
+      case 5: newTemp = kelToCel(userTemp);
+              System.out.println(userTemp + " in Kelvin is " + newTemp + " in Celsius.");
+              break;
+      case 6: newTemp = kelToFar(userTemp);
+              System.out.println(userTemp + " in Kelvin is " + newTemp + " in Farenheit.");
+              break;
     }
   }
 
@@ -116,9 +179,9 @@ public class Temperature {
       System.out.println("Run Temperature without arguments for a menu-based conversion,\nor run with arguments for a quick conversion.");
       System.out.println("Commandline arguments are used like this:");
       System.out.println("Temperature [temperature to convert] [from scale] [to scale]");
-      System.out.println("Supported scales: (C)elcius and (F)arenheit.");
+      System.out.println("Supported scales: (C)elsius (F)arenheit and (K)elvin");
       System.out.println("");
-      System.out.println("Example:\ntemperature 100 F C\nWill convert 100 Farenheit into Celcius.");
+      System.out.println("Example:\ntemperature 100 F C\nWill convert 100 Farenheit into Celsius.");
       System.exit(0);
     }
     String firstArgString = passedInput[0];
@@ -126,9 +189,53 @@ public class Temperature {
     String thirdArg = passedInput[2];
     numberCheck(firstArgString);
     double firstArg = Double.valueOf(firstArgString);
-    conversion(firstArg, secondArg);
+    int scale = shellScale(secondArg, thirdArg);
+    conversion(firstArg, scale);
   }
 
+  public static int shellScale(String scaleOne, String scaleTwo) {
+    int scale;
+    scaleOne = scaleOne.toLowerCase();
+    switch (scaleOne) {
+      case "c": if (scaleTwo.equals("f")) {
+                  scale = 1;
+                  break;
+                } else if (scaleTwo.equals("k")) {
+                  scale = 3;
+                  break;
+                } else {
+                  System.out.println("You did not enter a valid second temperature-scale.");
+                  scale = 0;
+                  System.exit(0);
+                }
+      case "f": if (scaleTwo.equals("c")) {
+                  scale = 2;
+                } else if (scaleTwo.equals("k")) {
+                  scale = 4;
+                } else {
+                  System.out.println("You did not enter a valid second temperature-scale.");
+                  scale = 0;
+                  System.exit(0);
+                break;
+                }
+      case "k": if (scaleTwo.equals("c")) {
+                  scale = 5;
+                } else if (scaleTwo.equals("f")) {
+                  scale = 6;
+                } else {
+                  System.out.println("You did not enter a valid second temperature-scale.");
+                  scale = 0;
+                  System.exit(0);
+                break;
+              }
+      default:  System.out.println("You did not enter a valid second temperature-scale.");
+                scale = 0;
+                System.exit(0);
+    }
+    return scale;
+  }
+
+  //This cheks to see it the passed string could be converted to a number.
   public static void numberCheck(String isANumber) {
     double check;
     try {
