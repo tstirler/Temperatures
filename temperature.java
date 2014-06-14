@@ -198,38 +198,40 @@ public class Temperature {
     scaleOne = scaleOne.toLowerCase();
     scaleTwo = scaleTwo.toLowerCase();
     switch (scaleOne) {
-      case "c": if (scaleTwo.equals("f")) {
-                  scale = 1;
-                } else if (scaleTwo.equals("k")) {
-                  scale = 3;
-                } else {
-                  scale = 0;
-                  System.out.println("You did not enter a valid second temperature-scale.");
+      case "c": switch (scaleTwo) {
+                  case "f": scale = 1;
+                            break;
+                  case "k": scale = 3;
+                            break;
+                  default:  scale = 0;
+                            System.out.println("You did not enter a valid second temperature-scale.");
+                            break;
                 }
                 break;
-      case "f": if (scaleTwo.equals("c")) {
-                  scale = 2;
-                } else if (scaleTwo.equals("k")) {
-                  scale = 4;
-                } else {
-                  System.out.println("You did not enter a valid second temperature-scale.");
-                  scale = 0;
-                  System.exit(0);
+      case "f": switch (scaleTwo) {
+                  case "c": scale = 2;
+                            break;
+                  case "k": scale =4;
+                            break;
+                  default:  scale = 0;
+                            System.out.println("You did not enter a valid second temperature-scale.");
+                            break;
                 }
                 break;
-      case "k": if (scaleTwo.equals("c")) {
-                  scale = 5;
-                } else if (scaleTwo.equals("f")) {
-                  scale = 6;
-                } else {
-                  System.out.println("You did not enter a valid second temperature-scale.");
-                  scale = 0;
-                  System.exit(0);
-              }
-              break;
-      default:  System.out.println("You did not enter a valid second temperature-scale.");
+      case "k": switch (scaleTwo) {
+                  case "c": scale = 5;
+                            break;
+                  case "f": scale = 6;
+                            break;
+                  default:  scale = 0;
+                            System.out.println("You did not enter a valid second temperature-scale.");
+                            break;
+                }
+                break;
+      default:  System.out.println("You did not enter a valid first temperature-scale.");
                 scale = 0;
                 System.exit(0);
+                break;
     }
     return scale;
   }
