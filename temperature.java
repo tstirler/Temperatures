@@ -196,17 +196,14 @@ public class Temperature {
   public static int shellScale(String scaleOne, String scaleTwo) {
     int scale;
     scaleOne = scaleOne.toLowerCase();
+    scaleTwo = scaleTwo.toLowerCase();
     switch (scaleOne) {
       case "c": if (scaleTwo.equals("f")) {
                   scale = 1;
-                  break;
                 } else if (scaleTwo.equals("k")) {
                   scale = 3;
-                  break;
                 } else {
                   System.out.println("You did not enter a valid second temperature-scale.");
-                  scale = 0;
-                  System.exit(0);
                 }
       case "f": if (scaleTwo.equals("c")) {
                   scale = 2;
