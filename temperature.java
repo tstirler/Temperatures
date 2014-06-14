@@ -203,8 +203,10 @@ public class Temperature {
                 } else if (scaleTwo.equals("k")) {
                   scale = 3;
                 } else {
+                  scale = 0;
                   System.out.println("You did not enter a valid second temperature-scale.");
                 }
+                break;
       case "f": if (scaleTwo.equals("c")) {
                   scale = 2;
                 } else if (scaleTwo.equals("k")) {
@@ -213,8 +215,8 @@ public class Temperature {
                   System.out.println("You did not enter a valid second temperature-scale.");
                   scale = 0;
                   System.exit(0);
-                break;
                 }
+                break;
       case "k": if (scaleTwo.equals("c")) {
                   scale = 5;
                 } else if (scaleTwo.equals("f")) {
@@ -223,8 +225,8 @@ public class Temperature {
                   System.out.println("You did not enter a valid second temperature-scale.");
                   scale = 0;
                   System.exit(0);
-                break;
               }
+              break;
       default:  System.out.println("You did not enter a valid second temperature-scale.");
                 scale = 0;
                 System.exit(0);
